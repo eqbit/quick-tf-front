@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchRegisteredTradesAction } from "../../redux/registered-trades-module";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchRegisteredTradesAction } from '../../redux/registered-trades-module';
 
 type Props = {
   fetchTrades: () => void;

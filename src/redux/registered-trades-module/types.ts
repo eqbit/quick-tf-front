@@ -1,17 +1,5 @@
-export type TRegisteredTrade = {
-  accountSteamid: string;
-  direction: boolean;
-  effect: string;
-  id: number;
-  itemid: string;
-  keys: number;
-  metal: number;
-  name: string;
-  partnerSteamid: string;
-  quality: string;
-  timestamp: string;
-};
+import { RegisteredTrade } from '../../api/requests/trades/types';
 
-export type TRegisteredTradeModuleState = {
-  trades: TRegisteredTrade[];
+export type RegisteredTradeModuleState = {
+  trades: RegisteredTrade[];
 };

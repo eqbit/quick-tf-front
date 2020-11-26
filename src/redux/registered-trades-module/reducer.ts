@@ -1,16 +1,16 @@
 import { Reducer } from "redux";
 import { UPDATE_REGISTERED_TRADES } from "./constants";
-import { TRegisteredTradeModuleState } from "./types";
+import { RegisteredTradeModuleState } from "./types";
 import * as actions from "./actions";
-import { InferValueTypes } from "../../types/global";
+import { InferValueTypes } from "../../types/redux/global";
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>;
 
-const initialState: TRegisteredTradeModuleState = {
+const initialState: RegisteredTradeModuleState = {
   trades: [],
 };
 
-const reducer: Reducer<TRegisteredTradeModuleState, ActionTypes> = (
+const reducer: Reducer<RegisteredTradeModuleState, ActionTypes> = (
   state = initialState,
   action
 ) => {

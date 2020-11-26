@@ -1,46 +1,8 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchRegisteredTradesAction } from '../../redux/registered-trades-module';
-import { ReduxStateType } from '../../types/redux/state';
-import { RegisteredTrade } from '../../api/requests/trades/types';
+import React, { memo } from 'react';
 
-type Props = {
-  tradesMade: RegisteredTrade[];
-  fetchRegisteredTrades: () => void;
+const HomePageComponent = () => {
+  return <div>Home</div>;
 };
 
-const HomePageComponent = ({ fetchRegisteredTrades, tradesMade }: Props) => {
-  useEffect(() => {
-    fetchRegisteredTrades();
-  }, [ fetchRegisteredTrades ]);
-  return (
-    <ul>
-      {tradesMade.map(trade => (
-        <li key={trade.id}>
-          <span>{`${trade.direction ? 'Sold ' : 'Bought '}`}</span>
-          <span>{`${trade.effect} ${trade.name}`}</span> -
-          <span>
-            {
-              `${
-                trade.keys ? trade.keys + ' keys ' : ''
-              }${
-                trade.metal ? trade.metal + ' ref ' : ''
-              }`
-            }
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-};
+export const HomePage = memo(HomePageComponent);
 
-const mapStateToProps = (state: ReduxStateType) => ({
-  tradesMade: state.registeredTrades.trades,
-});
-
-export const HomePage = connect(
-  mapStateToProps,
-  {
-    fetchRegisteredTrades: fetchRegisteredTradesAction,
-  }
-)(HomePageComponent);

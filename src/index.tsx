@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styles/index.css";
 import App from "./app";
+import { RouterProvider } from 'react-router5';
+import { configureRouter } from './routes/router';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const router = configureRouter();
+
+ReactDOM.render(
+  <RouterProvider router={router} >
+    <App />
+  </RouterProvider>,
+  document.getElementById("root"));

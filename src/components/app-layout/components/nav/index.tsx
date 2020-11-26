@@ -16,8 +16,13 @@ const NavComponent = () => {
           <BaseLink routeName="home" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Home</li>
           </BaseLink>
+
           <BaseLink routeName="trades-made" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Past trades</li>
+          </BaseLink>
+
+          <BaseLink routeName="generated-prices" router={router}>
+            <li className={cn(`${CLASS_NAME}__link`)}>Generated prices</li>
           </BaseLink>
         </ul>
       </Container>

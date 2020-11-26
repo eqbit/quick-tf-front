@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import RegisteredTrades from "./registered-trades-module";
+import registeredTrades from "./registered-trades-module";
+import generatedPrices from "./generated-prices-module";
 
 export const reducer = combineReducers({
-  registeredTrades: RegisteredTrades,
+  registeredTrades,
+  generatedPrices,
 });

@@ -1,0 +1,16 @@
+.nav {
+  background: #12152e;
+
+  &__menu {
+    display: flex;
+  }
+
+  &__link {
+    color: #FFF;
+    padding: 20px;
+
+    &:hover {
+      background: #0c0c18;
+    }
+  }
+}

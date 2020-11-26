@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
+import { Container } from '../../components/ui/container';
 
 const HomePageComponent = () => {
-  return <div>Home</div>;
+  return <Container><div>Home</div></Container>;
 };
 
 export const HomePage = memo(HomePageComponent);

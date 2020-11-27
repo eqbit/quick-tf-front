@@ -4,10 +4,11 @@ import { Router, State } from 'router5';
 
 type Props = {
   router: Router;
+  initialRoute: State;
 };
 
-export const RouteSwitcher = ({ router }: Props) => {
-  const [route, setRoute] = useState<State>();
+export const RouteSwitcher = ({ router, initialRoute }: Props) => {
+  const [route, setRoute] = useState<State>(initialRoute);
 
   useEffect(() => {
     router.subscribe((state) => {

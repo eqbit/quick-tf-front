@@ -10,14 +10,16 @@ type Props = {
 };
 
 const App = ({ router }: Props) => {
+  const route = router.getState();
+
   return (
     <Provider store={store}>
       <AppLayout>
-        <RouteSwitcher router={router}/>
+        <RouteSwitcher router={router} initialRoute={route}/>
       </AppLayout>
     </Provider>
   );
-}
+};
 
 export default App;
 

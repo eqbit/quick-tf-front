@@ -1,5 +1,3 @@
-import { RegisteredTradeModuleState } from '../../redux/registered-trades-module';
+import { reducer } from '../../redux/reducer';
 
-export type ReduxStateType = {
-  registeredTrades: RegisteredTradeModuleState;
-};
+export type ReduxStateType = ReturnType<typeof reducer>;

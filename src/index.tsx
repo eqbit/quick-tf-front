@@ -9,6 +9,6 @@ const router = configureRouter();
 
 ReactDOM.render(
   <RouterProvider router={router} >
-    <App />
+    <App router={router}/>
   </RouterProvider>,
   document.getElementById("root"));

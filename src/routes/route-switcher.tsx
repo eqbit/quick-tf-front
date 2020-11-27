@@ -1,29 +1,28 @@
-import React from 'react';
-import { RouteNode } from 'react-router5';
-import { routes } from './routes';
+import React, { useEffect, useMemo, useState } from 'react';
+import { getRoute } from './utils';
+import { Router, State } from 'router5';
 
-const pageNode = '';
+type Props = {
+  router: Router;
+};
 
-export const RouteSwitcher = () => {
-  return (
-    <RouteNode nodeName={pageNode}>
-      {({ route }) => {
-        if (!route) {
-          return null;
-        }
+export const RouteSwitcher = ({ router }: Props) => {
+  const [route, setRoute] = useState<State>();
 
-        const currentRoute = routes.find(routeItem => routeItem.name === route.name);
+  useEffect(() => {
+    router.subscribe((state) => {
+      setRoute(state.route);
+    });
+  }, [router]);
 
-        if (!currentRoute) {
-          return null;
-        }
+  const name = route ? route.name : '';
+  const currentRoute = useMemo(() => getRoute(name), [name]);
 
-        const Page = currentRoute.page;
+  if (!currentRoute) {
+    return null;
+  }
 
-        return (
-          <Page/>
-        )
-      }}
-    </RouteNode>
-  );
+  const Page = currentRoute.page;
+
+  return <Page/>
 };

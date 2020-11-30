@@ -13,7 +13,7 @@ type Props = {
 
 const Component = ({ name, imageUrl, price }: Props) => {
   return (
-    <li className={cn(CLASS_NAME)}>
+    <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__item`)}>
         <h4 className={cn(`${CLASS_NAME}__name`)}>{name}</h4>
         <img
@@ -25,7 +25,7 @@ const Component = ({ name, imageUrl, price }: Props) => {
           {price}
         </span>
       </div>
-    </li>
+    </div>
   )
 };
 

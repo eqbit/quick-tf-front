@@ -1,13 +1,15 @@
+@import "../../styles/colors.module";
+
 .item-grid {
   &__list {
     display: grid;
     grid-gap: 8px;
     grid-template-columns: repeat(8, calc((100% - 56px) / 8));
-  }
 
-  &__list:hover {
-    > li:not(:hover) {
-      background-color: #734c98;
+    &:hover {
+      > a:not(:hover) > div > div {
+        background-color: darken($unusual, 10);
+      }
     }
   }
 }

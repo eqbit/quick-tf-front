@@ -12,9 +12,9 @@ type Props = {
 const Component = ({ children }: Props) => {
   return (
     <div className={cn(CLASS_NAME)}>
-      <ul className={cn(`${CLASS_NAME}__list`)}>
+      <div className={cn(`${CLASS_NAME}__list`)}>
         {children}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { ItemSchema } from '../../../types/api';
+
 export type GeneratedBasePrice = {
   craftMaterialType: string;
   id: number;
@@ -10,3 +12,15 @@ export type GeneratedBasePrice = {
 };
 
 export type GetGeneratedBasePricesResponse = GeneratedBasePrice[];
+
+export type GeneratedBasePriceItem = {
+  id: number;
+  name: string;
+  effect: string;
+  price: string;
+};
+
+export type GeneratedBasePriceListResponse = {
+  prices: GeneratedBasePriceItem[];
+  schema: ItemSchema;
+};

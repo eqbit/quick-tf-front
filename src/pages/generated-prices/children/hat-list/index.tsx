@@ -16,7 +16,7 @@ const Page = ({ fetchGeneratedBasePrices }: Props) => {
   }, [fetchGeneratedBasePrices, name]);
 
   return (
-    <GeneratedPricesListPageLayout/>
+    <GeneratedPricesListPageLayout name={name}/>
   );
 };
 

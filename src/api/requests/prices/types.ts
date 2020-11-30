@@ -17,6 +17,7 @@ export type GeneratedBasePriceItem = {
   id: number;
   name: string;
   effect: string;
+  effectId: number;
   price: string;
 };
 

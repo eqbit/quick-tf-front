@@ -7,7 +7,8 @@
     grid-template-columns: repeat(8, calc((100% - 56px) / 8));
 
     &:hover {
-      > a:not(:hover) > div > div {
+      > a:not(:hover) > div,
+      > div:not(:hover) {
         background-color: darken($unusual, 10);
       }
     }

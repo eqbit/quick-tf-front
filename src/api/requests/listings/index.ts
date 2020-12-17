@@ -1,6 +1,7 @@
 import { fetch } from '../../fetch';
 import { ReqResponse } from '../../../types/api';
 import { getRegisteredListingsEndpoint } from '../../endpoints/registered-listings';
+import { RegisteredListing } from './types';
 
 export type RegisteredListingsRequestOptions = {
   name: string;
@@ -9,4 +10,4 @@ export type RegisteredListingsRequestOptions = {
 }
 
 export const registeredListingsRequest = async (options: RegisteredListingsRequestOptions) =>
-  fetch.get<ReqResponse<any>>(getRegisteredListingsEndpoint(options));
+  fetch.get<ReqResponse<RegisteredListing[]>>(getRegisteredListingsEndpoint(options));

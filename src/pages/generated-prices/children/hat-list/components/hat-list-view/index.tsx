@@ -1,5 +1,6 @@
 import React, { memo, useMemo, useState } from 'react';
 import classNamesBind from 'classnames/bind';
+import { Link } from 'react-router5';
 import { ItemGrid } from '../../../../../../components/item-grid';
 import { Item } from '../../../../../../components/item-grid/item';
 import { GeneratedBasePriceItem } from '../../../../../../api/requests/prices/types';
@@ -42,16 +43,10 @@ const Component = ({ basePrices, schema }: Props) => {
       <div className={cn(`${CLASS_NAME}__items-grid`)}>
         <ItemGrid>
           {filteredPrices.map((item) => (
-            //<Link
-            //key={item.id}
-            //routeName="generated-prices.hat"
-            //routeParams={{ name: item.name }}
-            //>
-            <a
+            <Link
               key={item.id}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              routeName="unusuals.hat.hat-detail"
+              routeParams={{ name: item.name, effect: item.effect }}
             >
               <Item
                 name={item.name}
@@ -61,9 +56,8 @@ const Component = ({ basePrices, schema }: Props) => {
                 effectImg={item.effectImg}
                 quality="Unusual"
               />
-            </a>
 
-            //</Link>
+            </Link>
           ))}
         </ItemGrid>
       </div>

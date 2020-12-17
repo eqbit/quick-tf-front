@@ -34,7 +34,7 @@ const Component = ({ basePrices }: Props) => {
           {filteredPrices.map((item) => (
             <Link
               key={item.id}
-              routeName="generated-prices.hat"
+              routeName="unusuals.hat"
               routeParams={{ name: item.name }}
             >
               <Item

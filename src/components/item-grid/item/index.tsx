@@ -41,8 +41,8 @@ const Component = ({ name, imageUrl, price, effectName, effectImg, quality }: Pr
         />
       </div>
       <span className={cn(`${CLASS_NAME}__price`)}>
-          {price}
-        </span>
+        {price}
+      </span>
     </div>
   )
 };

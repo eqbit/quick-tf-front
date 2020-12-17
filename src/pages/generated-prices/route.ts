@@ -2,8 +2,8 @@ import { GeneratedPricesPage } from './';
 import hatRout from './children/hat-list/route';
 
 const route = {
-  name: 'generated-prices',
-  path: '/generated-prices',
+  name: 'unusuals',
+  path: '/unusuals',
   page: GeneratedPricesPage,
   children: [hatRout],
 };

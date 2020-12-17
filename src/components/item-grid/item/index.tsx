@@ -11,11 +11,14 @@ type Props = {
   price: string;
   effectName?: string;
   effectImg?: string;
+  quality?: string;
 };
 
-const Component = ({ name, imageUrl, price, effectName, effectImg }: Props) => {
+const Component = ({ name, imageUrl, price, effectName, effectImg, quality }: Props) => {
   return (
-    <div className={cn(CLASS_NAME)}>
+    <div className={cn(CLASS_NAME, {
+      [`${CLASS_NAME}--${quality?.toLowerCase()}`]: Boolean(quality),
+    })}>
       <h4 className={cn(`${CLASS_NAME}__name`)}>{effectName || name}</h4>
       {
         Boolean(effectImg) && (

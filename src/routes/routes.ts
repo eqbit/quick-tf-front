@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import home from '../pages/home/route';
 import tradesMade from '../pages/trades-made/route'
 import generatedPrices from '../pages/generated-prices/route';
-import { FC } from 'react';
+import regularItems from '../pages/regular-items/route';
 
 type Route = {
   name: string;
@@ -14,4 +15,5 @@ export const routes: Route[] = [
   home,
   tradesMade,
   generatedPrices,
+  regularItems,
 ];

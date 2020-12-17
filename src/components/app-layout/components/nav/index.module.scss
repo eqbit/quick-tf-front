@@ -1,5 +1,12 @@
+@import "../../../../styles/z.module";
+
 .nav {
   background: #12152e;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: $headerNav;
 
   &__menu {
     display: flex;

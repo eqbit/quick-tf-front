@@ -59,6 +59,7 @@ const Component = ({ basePrices, schema }: Props) => {
                 price={item.price}
                 effectName={item.effect}
                 effectImg={item.effectImg}
+                quality="Unusual"
               />
             </a>
 

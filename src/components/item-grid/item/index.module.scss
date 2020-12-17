@@ -1,7 +1,6 @@
 @import "../../../styles/colors.module";
 
 .item {
-  background-color: $unusual;
   border-radius: 4px;
   height: 120px;
   overflow: hidden;
@@ -9,6 +8,70 @@
   position: relative;
   transition: background-color .3s;
   z-index: 1;
+
+  &--unusual {
+    background-color: $unusual;
+
+    &:hover {
+      background-color: lighten($unusual, 10);
+    }
+  }
+
+  &--vintage {
+    background-color: $vintage;
+
+    &:hover {
+      background-color: lighten($vintage, 10);
+    }
+  }
+
+  &--genuine {
+    background-color: $genuine;
+
+    &:hover {
+      background-color: lighten($genuine, 10);
+    }
+  }
+
+  &--strange {
+    background-color: $strange;
+
+    &:hover {
+      background-color: lighten($strange, 10);
+    }
+  }
+
+  &--unique {
+    background-color: $unique;
+
+    &:hover {
+      background-color: lighten($unique, 10);
+    }
+  }
+
+  &--unusual {
+    background-color: $unusual;
+
+    &:hover {
+      background-color: lighten($unusual, 10);
+    }
+  }
+
+  &--haunted {
+    background-color: $haunted;
+
+    &:hover {
+      background-color: lighten($haunted, 10);
+    }
+  }
+
+  &--collector {
+    background-color: $collector;
+
+    &:hover {
+      background-color: lighten($collector, 10);
+    }
+  }
 
   &__img-wrapper {
     height: 96px;
@@ -54,9 +117,5 @@
     padding: 4px 8px;
     position: absolute;
     right: 4px;
-  }
-
-  &:hover {
-    background-color: lighten($unusual, 10);
   }
 }

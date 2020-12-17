@@ -43,7 +43,7 @@ const Component = ({ tradesMade }: Props) => {
                 `${CLASS_NAME}__cell--${trade.quality.toLowerCase()}`,
               )}
             >
-              {`${trade.effect} ${trade.name}`}
+              {`${trade.effect !== 'none' ? trade.effect : trade.quality} ${trade.name}`}
             </div>
 
             <div

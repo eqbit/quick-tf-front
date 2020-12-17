@@ -24,6 +24,10 @@ const NavComponent = () => {
           <BaseLink routeName="generated-prices" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Generated prices</li>
           </BaseLink>
+
+          <BaseLink routeName="regular-items" router={router}>
+            <li className={cn(`${CLASS_NAME}__link`)}>Regular items</li>
+          </BaseLink>
         </ul>
       </Container>
     </nav>

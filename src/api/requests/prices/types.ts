@@ -25,3 +25,14 @@ export type GeneratedBasePriceListResponse = {
   prices: GeneratedBasePriceItem[];
   schema: ItemSchema;
 };
+
+export type RegularItem = {
+  currency: 'keys' | 'metal';
+  name: string;
+  quality: string;
+  value: number;
+  value_high?: number;
+  imageUrl: string;
+};
+
+export type RegularItemsResponse = RegularItem[];

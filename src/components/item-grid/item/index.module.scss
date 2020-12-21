@@ -1,6 +1,8 @@
 @import "../../../styles/colors.module";
 
 .item {
+  $self: &;
+
   border-radius: 4px;
   height: 120px;
   overflow: hidden;
@@ -49,14 +51,6 @@
     }
   }
 
-  &--unusual {
-    background-color: $unusual;
-
-    &:hover {
-      background-color: lighten($unusual, 10);
-    }
-  }
-
   &--haunted {
     background-color: $haunted;
 
@@ -73,27 +67,31 @@
     }
   }
 
+  &--large {
+    height: 160px;
+  }
+
   &__img-wrapper {
     height: 96px;
     left: 28px;
     position: absolute;
     top: 20px;
-    width: 96px;
-    z-index: -1;
     transition: transform .3s;
     transition-delay: .3s;
+    width: 96px;
+    z-index: -1;
 
     &--effect {
       height: 120px;
-      width: 120px;
       left: 22px;
       top: 0;
+      width: 120px;
     }
   }
 
   &__img {
-    width: 100%;
     object-fit: contain;
+    width: 100%;
   }
 
   &__name {
@@ -117,5 +115,41 @@
     padding: 4px 8px;
     position: absolute;
     right: 4px;
+  }
+
+  &__second-price {
+    background: rgba(0,0,0,.2);
+    border-radius: 4px;
+    bottom: 30px;
+    color: #FFF;
+    font-size: 12px;
+    padding: 4px 8px;
+    position: absolute;
+    right: 4px;
+  }
+
+  &__popup {
+    background: #FFF;
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
+    color: #333;
+    font-size: 12px;
+    left: 0;
+    opacity: 0;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    transition: .1s;
+    width: 200px;
+    z-index: 10;
+  }
+
+  &__wrapper {
+    position: relative;
+
+    &:hover {
+      #{$self}__popup {
+        opacity: 1;
+      }
+    }
   }
 }

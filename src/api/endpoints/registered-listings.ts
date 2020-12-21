@@ -9,3 +9,5 @@ export const getRegisteredListingsEndpoint = ({
   effect
     ? `${apiRoot}/registered-listings/${quality}/${name}/${effect}`
     : `${apiRoot}/registered-listings/${quality}/${name}`;
+
+export const niceDealsEndpoint = `${apiRoot}/nice-deals`;

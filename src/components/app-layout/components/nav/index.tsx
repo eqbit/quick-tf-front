@@ -28,6 +28,10 @@ const NavComponent = () => {
           <BaseLink routeName="regular-items" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Regular items</li>
           </BaseLink>
+
+          <BaseLink routeName="nice-deals" router={router}>
+            <li className={cn(`${CLASS_NAME}__link`)}>Nice deals</li>
+          </BaseLink>
         </ul>
       </Container>
     </nav>

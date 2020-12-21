@@ -12,3 +12,14 @@ export type RegisteredListing = {
   quality: keyof typeof EItemQualities;
   steamid: string;
 };
+
+export type NiceDeal = {
+  id: number;
+  effect: string;
+  effectIndex: number;
+  generatedPrice: number;
+  listingPrice: number;
+  name: string;
+  imageUrl?: string;
+  date_time: string;
+};

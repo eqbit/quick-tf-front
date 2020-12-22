@@ -1,8 +1,14 @@
-import React, { memo, useCallback, useMemo } from 'react';
-import Charts from 'highcharts-react-official';
-import * as Highcharts from 'highcharts';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import classNamesBind from 'classnames/bind';
 import { RegisteredListing } from '../../../../../../../../api/requests/listings/types';
-import { userInfoRequest } from '../../../../../../../../api/requests/user-info';
+import { Charts } from './components/charts';
+import styles from './index.module.scss';
+import { UserInfoResponse } from '../../../../../../../../api/requests/user-info/types';
+import { itemInfoRequest } from '../../../../../../../../api/requests/items';
+import { getEffectIndex } from '../../../../../../../../utils/effects';
+
+const CLASS_NAME = 'view';
+const cn = classNamesBind.bind(styles);
 
 type Props = {
   name: string;
@@ -12,67 +18,49 @@ type Props = {
 };
 
 const Component = ({ registeredListings = [], name, effect }: Props) => {
-  const [ sellListings, buyListings ] = useMemo(() => {
-    const listings = registeredListings.sort((a, b) =>
-      new Date(b.date_time).getTime() - new Date(a.date_time).getTime()
-    );
+  const [imgSrc, setImgSrc] = useState('');
 
-    return [
-      listings.filter(listing => listing.intend === 1),
-      listings.filter(listing => listing.intend === 0),
-    ]
-  }, [ registeredListings ]);
+  useEffect(() => {
+    itemInfoRequest(name).then((response) => setImgSrc(response?.data.image_url || ''));
+  }, [name]);
 
-  const getItem = useCallback((intent: string, time: number) => {
-    const rawIntent = intent === 'buy' ? 0 : 1;
-    return registeredListings.find(item =>
-      item.intend === rawIntent && new Date(item.date_time).getTime() === time
-    );
-  }, [registeredListings]);
+  const handleChartPointClick = useCallback((user: UserInfoResponse) => {
+    console.log(user);
+  }, []);
 
-  const options: Highcharts.Options = {
-    title: {
-      text: 'Past listings'
-    },
-    xAxis: {
-      type: 'datetime',
-    },
-    series: [
-      {
-        type: 'line',
-        color: '#AD0000',
-        name: 'sell',
-        data: sellListings.map(listing => [ new Date(listing.date_time).getTime(), Number(listing.price_keys) ])
-      },
-      {
-        type: 'line',
-        name: 'buy',
-        data: buyListings.map(listing => [ new Date(listing.date_time).getTime(), Number(listing.price_keys) ])
-      },
-    ],
-    tooltip: {
-      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y} keys</b>',
-    },
-    plotOptions: {
-      series: {
-        point: {
-          events: {
-            click: function() {
-              const item = getItem(this.series.name, this.x);
-              item && userInfoRequest(item?.steamid).then(response => console.log(response?.data.avatarfull));
-            }
-          }
-        }
-      }
-    },
-  };
+  const bptfHatLink = `https://backpack.tf/classifieds?item=${
+    name
+  }&quality=5&tradable=1&craftable=1&australium=-1&particle=${
+    effect ? getEffectIndex(effect) : ''
+  }&killstreak_tier=0`;
 
   return (
-    <div>
-      <Charts
-        highcharts={Highcharts}
-        options={options}
-      />
+    <div className={cn(CLASS_NAME)}>
+      <div className={cn(`${CLASS_NAME}__info`)}>
+        <a
+          className={cn(`${CLASS_NAME}__link`)}
+          href={bptfHatLink} target="_blank"
+          rel="noreferrer noopener"
+        >
+          <h1 className={cn(`${CLASS_NAME}__page-title`)}>{`${effect} ${name}`}</h1>
+        </a>
+        <a
+          className={cn(`${CLASS_NAME}__link`)}
+          href={bptfHatLink} target="_blank"
+          rel="noreferrer noopener"
+        >
+
+          <div className={cn(`${CLASS_NAME}__img`)}>
+            <img src={imgSrc} alt=""/>
+          </div>
+        </a>
+      </div>
+      <div className={cn(`${CLASS_NAME}__charts`)}>
+        <Charts
+          registeredListings={registeredListings}
+          onPointClick={handleChartPointClick}
+        />
+      </div>
     </div>
   )
 };

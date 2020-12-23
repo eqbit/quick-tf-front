@@ -1,26 +1,51 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { NiceDealsPageLayout } from './page';
 import { niceDealsRequest } from '../../api/requests/listings';
 import { NiceDeal } from '../../api/requests/listings/types';
 
 const Page = () => {
   const [deals, setDeals] = useState<NiceDeal[]>([]);
+  const fetchDealsInterval = useRef<any>();
 
-  const fetchDeals = async () => {
-    const deals = await niceDealsRequest(60).then((response) => response?.data);
-    if (deals) {
-      setDeals(deals);
-    }
-  };
+  const [profitPercent, setProfitPercent] = useState(40);
+
+  const fetchDeals = useCallback(() => new Promise<void>(resolve => {
+    niceDealsRequest(100 - profitPercent).then((response) => {
+      if (response?.data) {
+        setDeals(response?.data);
+      }
+
+      resolve();
+    });
+  }), [profitPercent]);
 
   useEffect(() => {
-    fetchDeals().then(() => {
-      setInterval(fetchDeals, 10 * 1000);
-    })
-  }, []);
+    if (fetchDealsInterval.current) {
+      clearInterval(fetchDealsInterval.current);
+    }
+    fetchDealsInterval.current = setInterval(fetchDeals, 10 * 1000);
+  }, [fetchDeals]);
+
+  useEffect(() => {
+    fetchDeals();
+
+    return () => {
+      if (fetchDealsInterval.current) {
+        clearInterval(fetchDealsInterval.current);
+      }
+    }
+  }, [fetchDeals, profitPercent]);
+
+  const handleProfitPercentChange = (value: number) => {
+    setProfitPercent(value);
+  };
 
   return (
-    <NiceDealsPageLayout deals={deals}/>
+    <NiceDealsPageLayout
+      deals={deals}
+      profitPercent={profitPercent}
+      onProfitPercentChange={handleProfitPercentChange}
+    />
   );
 };
 

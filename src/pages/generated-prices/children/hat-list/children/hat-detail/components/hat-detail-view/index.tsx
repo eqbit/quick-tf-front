@@ -20,7 +20,6 @@ type Props = {
 const Component = ({ registeredListings = [], name, effect }: Props) => {
   const [ imgSrc, setImgSrc ] = useState('');
   const [ isUserLoading, setIsUserLoading ] = useState(false);
-  const [userSteamid, setUserSteamid] = useState('');
   const [ userName, setUserName ] = useState('');
   const [ userUrl, setUserUrl ] = useState('');
   const [ userAvatar, setUserAvatar ] = useState('');
@@ -31,7 +30,6 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
 
   const handleChartPointClick = useCallback((steamid: string) => {
     setIsUserLoading(true);
-    setUserSteamid(steamid);
 
     userInfoRequest(steamid).then((response) => {
       if (response?.data) {
@@ -44,7 +42,7 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
         setUserAvatar(user.avatarfull);
       }
     });
-  }, [userSteamid]);
+  }, []);
 
   const effectIndex = effect ? getEffectIndex(effect) : '';
 

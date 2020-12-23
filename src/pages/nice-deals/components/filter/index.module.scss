@@ -1,0 +1,16 @@
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &__field {
+    &-title {
+      font-size: 16px;
+      color: #333;
+    }
+  }
+
+  &__slider {
+    width: 200px;
+  }
+}

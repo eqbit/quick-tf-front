@@ -1,13 +1,11 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import ReactCharts from 'highcharts-react-official';
 import * as Highcharts from 'highcharts';
-import { userInfoRequest } from '../../../../../../../../../../api/requests/user-info';
 import { RegisteredListing } from '../../../../../../../../../../api/requests/listings/types';
-import { UserInfoResponse } from '../../../../../../../../../../api/requests/user-info/types';
 
 type Props = {
   registeredListings: RegisteredListing[];
-  onPointClick: (user: UserInfoResponse) => void;
+  onPointClick: (steamid: string) => void;
 };
 
 const Component = ({ registeredListings, onPointClick }: Props) => {
@@ -23,11 +21,11 @@ const Component = ({ registeredListings, onPointClick }: Props) => {
   }, [ registeredListings ]);
 
   const getItem = useCallback((intent: string, time: number) => {
-    const rawIntent = intent === 'buy' ? 0 : 1;
+    const rawIntent = intent === 'Buy listings' ? 0 : 1;
     return registeredListings.find(item =>
       item.intend === rawIntent && new Date(item.date_time).getTime() === time
     );
-  }, [registeredListings]);
+  }, [ registeredListings ]);
 
   const options: Highcharts.Options = {
     title: {
@@ -71,10 +69,9 @@ const Component = ({ registeredListings, onPointClick }: Props) => {
       series: {
         point: {
           events: {
-            click: function() {
+            click: function () {
               const item = getItem(this.series.name, this.x);
-              item && userInfoRequest(item?.steamid)
-                .then(response => response && onPointClick(response?.data));
+              item && onPointClick(item.steamid);
             },
           }
         }

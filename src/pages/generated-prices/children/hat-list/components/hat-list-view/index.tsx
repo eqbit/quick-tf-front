@@ -4,16 +4,16 @@ import { Link } from 'react-router5';
 import { ItemGrid } from '../../../../../../components/item-grid';
 import { Item } from '../../../../../../components/item-grid/item';
 import { GeneratedBasePriceItem } from '../../../../../../api/requests/prices/types';
-import { ItemSchema } from '../../../../../../types/api';
 import styles from './index.module.scss';
 import { SearchBar } from '../../../../../../components/search-bar';
+import { TSchemaItem } from '../../../../../../api/requests/items/types';
 
 const cn = classNamesBind.bind(styles);
 const CLASS_NAME = 'hat-list-view';
 
 type Props = {
   basePrices: GeneratedBasePriceItem[];
-  schema: ItemSchema;
+  schema: TSchemaItem;
 };
 
 const Component = ({ basePrices, schema }: Props) => {
@@ -50,7 +50,7 @@ const Component = ({ basePrices, schema }: Props) => {
             >
               <Item
                 name={item.name}
-                imageUrl={schema.imageUrl}
+                imageUrl={schema.image_url}
                 price={item.price}
                 effectName={item.effect}
                 effectImg={item.effectImg}

@@ -3,17 +3,15 @@
 .view {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 3fr 9fr;
 
   &__info {
     background: #fff;
-    min-height: 100%;
     padding: 20px;
   }
 
   &__page-title {
     color: #333;
-    font-size: 18px;
+    font-size: 24px;
   }
 
   &__img {
@@ -24,11 +22,35 @@
     height: 150px;
     justify-content: center;
     margin-top: 8px;
-    width: 100%;
+    width: 150px;
+    position: relative;
+    z-index: 1;
   }
 
-  &__charts {
+  &__effect-img {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &-charts {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 3fr 9fr;
     height: 400px;
-    min-height: 100%;
+
+    &__user {
+      background: #fff;
+      min-height: 100%;
+      padding: 20px;
+    }
+
+    &__user-name {
+      font-size: 16px;
+      color: #333;
+      margin-top: 8px;
+    }
   }
 }

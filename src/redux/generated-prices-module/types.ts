@@ -1,5 +1,5 @@
 import { GeneratedBasePrice, GeneratedBasePriceItem } from '../../api/requests/prices/types';
-import { ItemSchema } from '../../types/api';
+import { TSchemaItem } from '../../api/requests/items/types';
 
 export type GeneratedPricesModuleState = {
   basePrices: GeneratedBasePrice[];
@@ -8,7 +8,7 @@ export type GeneratedPricesModuleState = {
 
 export type GeneratedPricesListItem = {
   prices: GeneratedBasePriceItem[];
-  schema: ItemSchema;
+  schema: TSchemaItem;
 }
 
 export type UpdateGeneratedBasePricesActionPayload = GeneratedBasePrice[]

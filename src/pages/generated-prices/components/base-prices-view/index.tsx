@@ -39,7 +39,7 @@ const Component = ({ basePrices }: Props) => {
             >
               <Item
                 name={item.name}
-                imageUrl={item.imageUrl}
+                imageUrl={item.image_url}
                 price={`base: ${Math.floor(Number(item.price) * 100) / 100}`}
                 quality="Unusual"
               />

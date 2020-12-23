@@ -17,16 +17,19 @@ type Props = {
 };
 
 const Component = ({ name, imageUrl, price, effectName, effectImg, quality, secondPrice, date }: Props) => {
+  const isPopupNeeded = Boolean(date);
+
   return (
     <div className={cn(`${CLASS_NAME}__wrapper`)}>
-      <div className={cn(`${CLASS_NAME}__popup`)}>
-        {Boolean(date) && (
-          <div className={cn(`${CLASS_NAME}__date`)}>
-            {`Listing date: ${date}`}
-          </div>
-        )}
-      </div>
-
+      {isPopupNeeded && (
+        <div className={cn(`${CLASS_NAME}__popup`)}>
+          {Boolean(date) && (
+            <div className={cn(`${CLASS_NAME}__date`)}>
+              {`Listing date: ${date}`}
+            </div>
+          )}
+        </div>
+      )}
       <div
         className={cn(CLASS_NAME, {
           [`${CLASS_NAME}--${quality?.toLowerCase()}`]: Boolean(quality),
@@ -51,7 +54,7 @@ const Component = ({ name, imageUrl, price, effectName, effectImg, quality, seco
           <img
             className={cn(`${CLASS_NAME}__img`)}
             src={imageUrl}
-            alt={name}
+            alt=""
           />
         </div>
         {Boolean(secondPrice) ? (

@@ -1,14 +1,9 @@
-import { ItemSchema } from '../../../types/api';
+import { TSchemaItem } from '../items/types';
 
-export type GeneratedBasePrice = {
-  craftMaterialType: string;
+export type GeneratedBasePrice = TSchemaItem & {
   id: number;
-  imageUrl: string;
-  imageUrlLarge: string;
-  itemSlot: string;
   name: string;
   price: string;
-  usedByClasses: string;
 };
 
 export type GetGeneratedBasePricesResponse = GeneratedBasePrice[];
@@ -23,7 +18,7 @@ export type GeneratedBasePriceItem = {
 
 export type GeneratedBasePriceListResponse = {
   prices: GeneratedBasePriceItem[];
-  schema: ItemSchema;
+  schema: TSchemaItem;
 };
 
 export type RegularItem = {

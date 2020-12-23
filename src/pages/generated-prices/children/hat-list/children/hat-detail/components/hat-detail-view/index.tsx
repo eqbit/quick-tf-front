@@ -30,10 +30,6 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
   }, [ name ]);
 
   const handleChartPointClick = useCallback((steamid: string) => {
-    if (steamid === userSteamid) {
-      return;
-    }
-
     setIsUserLoading(true);
     setUserSteamid(steamid);
 
@@ -95,19 +91,27 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
             ? <span>Loading...</span>
             : (
               <>
-                {Boolean(userUrl) && (
+                {Boolean(userUrl) ? (
                   <a
                     href={userUrl}
                     className={cn(`${CLASS_NAME}-charts__user-link`)}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    <div className={cn(`${CLASS_NAME}-charts__user-avatar`)}>
-                      <img src={userAvatar} alt=""/>
+                    <div className={cn(`${CLASS_NAME}-charts__user-avatar-frame`)}>
+                      <div className={cn(`${CLASS_NAME}-charts__user-avatar`)}>
+                        <img src={userAvatar} alt=""/>
+                      </div>
                     </div>
 
                     <h2 className={cn(`${CLASS_NAME}-charts__user-name`)}>{userName}</h2>
                   </a>
+                ) : (
+                  <div className={cn(`${CLASS_NAME}-charts__user-avatar-frame`)}>
+                    <div className={cn(`${CLASS_NAME}-charts__user-avatar`)}>
+                      <img src="/img/anon.webp" alt=""/>
+                    </div>
+                  </div>
                 )}
               </>
             )}

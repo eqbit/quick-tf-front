@@ -13,17 +13,31 @@ const CLASS_NAME = 'page-layout';
 type Props = {
   deals: NiceDeal[];
   onProfitPercentChange: (value: number) => void;
+  onDepthChange: (value: number) => void;
   profitPercent: number;
+  searchQuery: string;
+  onSearch: (value: string) => void;
 };
 
-const Layout = ({ deals, profitPercent, onProfitPercentChange }: Props) => {
+const Layout = (
+  {
+    deals,
+    profitPercent,
+    onProfitPercentChange,
+    onDepthChange,
+    onSearch,
+    searchQuery,
+  }: Props) => {
   return (
     <Container>
       <div className={cn(CLASS_NAME)}>
-        <div className={cn(`${CLASS_NAME}__content`)}>
+        <div className={cn(`${CLASS_NAME}__filter`)}>
           <Filter
             profitPercent={profitPercent}
             onProfitPercentChange={onProfitPercentChange}
+            onDepthChange={onDepthChange}
+            searchQuery={searchQuery}
+            onSearch={onSearch}
           />
         </div>
 
@@ -49,7 +63,7 @@ const Layout = ({ deals, profitPercent, onProfitPercentChange }: Props) => {
                   quality="Unusual"
                   effectName={`${item.effect} ${item.name}`}
                   effectImg={`https://backpack.tf/images/440/particles/${item.effectIndex}_380x380.png`}
-                  date={new Date(item.date_time).toLocaleTimeString('ru')}
+                  date={new Date(item.date_time).toLocaleString('ru')}
                 />
               </a>
             ))}

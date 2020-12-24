@@ -12,5 +12,10 @@ export type RegisteredListingsRequestOptions = {
 export const registeredListingsRequest = async (options: RegisteredListingsRequestOptions) =>
   fetch.get<ReqResponse<RegisteredListing[]>>(getRegisteredListingsEndpoint(options));
 
-export const niceDealsRequest = async (percent: number) =>
-  fetch.get<ReqResponse<NiceDeal[]>>(niceDealsEndpoint, { percent });
+export type NiceDealsOptions = {
+  percent: number;
+  depth: number;
+};
+
+export const niceDealsRequest = async (options: NiceDealsOptions) =>
+  fetch.get<ReqResponse<NiceDeal[]>>(niceDealsEndpoint, options);

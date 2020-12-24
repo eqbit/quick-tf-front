@@ -37,7 +37,7 @@ const Component = (
         <div className={cn(`${CLASS_NAME}__popup`)}>
           {Boolean(date) && (
             <div className={cn(`${CLASS_NAME}__date`)}>
-              {`Listing date: ${date}`}
+              {date}
             </div>
           )}
         </div>

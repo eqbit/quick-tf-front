@@ -4,6 +4,6 @@
   &__list {
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(8, calc((100% - 56px) / 8));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }

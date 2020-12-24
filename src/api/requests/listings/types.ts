@@ -19,6 +19,7 @@ export type NiceDeal = {
   effectIndex: number;
   generatedPrice: number;
   listingPrice: number;
+  bptfPrice: number;
   name: string;
   imageUrl?: string;
   date_time: string;

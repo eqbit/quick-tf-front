@@ -45,10 +45,11 @@ const Layout = ({ deals, profitPercent, onProfitPercentChange }: Props) => {
                   imageUrl={item.imageUrl || ''}
                   price={`generated: ${item.generatedPrice}`}
                   secondPrice={`listing: ${item.listingPrice}`}
+                  thirdPrice={`suggested: ${item.bptfPrice}`}
                   quality="Unusual"
                   effectName={`${item.effect} ${item.name}`}
                   effectImg={`https://backpack.tf/images/440/particles/${item.effectIndex}_380x380.png`}
-                  date={new Date(item.date_time).toLocaleString('ru')}
+                  date={new Date(item.date_time).toLocaleTimeString('ru')}
                 />
               </a>
             ))}

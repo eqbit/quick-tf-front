@@ -68,7 +68,7 @@
   }
 
   &--large {
-    height: 160px;
+    height: 180px;
   }
 
   &__img-wrapper {
@@ -120,6 +120,17 @@
   &__second-price {
     background: rgba(0,0,0,.2);
     border-radius: 4px;
+    bottom: 56px;
+    color: #FFF;
+    font-size: 12px;
+    padding: 4px 8px;
+    position: absolute;
+    right: 4px;
+  }
+
+  &__third-price {
+    background: rgba(0,0,0,.2);
+    border-radius: 4px;
     bottom: 30px;
     color: #FFF;
     font-size: 12px;
@@ -137,9 +148,12 @@
     opacity: 0;
     padding: 10px;
     position: absolute;
-    top: 0;
+    top: 100%;
+    transform: translateX(-200vw);
     transition: .1s;
-    width: 200px;
+    transition-delay: .05s;
+    transition-property: opacity;
+    width: 100%;
     z-index: 10;
   }
 
@@ -149,6 +163,7 @@
     &:hover {
       #{$self}__popup {
         opacity: 1;
+        transform: none;
       }
     }
   }

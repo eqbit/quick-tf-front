@@ -10,13 +10,25 @@ type Props = {
   imageUrl: string;
   price: string;
   secondPrice?: string;
+  thirdPrice?: string;
   effectName?: string;
   effectImg?: string;
   quality?: string;
   date?: string;
 };
 
-const Component = ({ name, imageUrl, price, effectName, effectImg, quality, secondPrice, date }: Props) => {
+const Component = (
+  {
+    name,
+    imageUrl,
+    price,
+    effectName,
+    effectImg,
+    quality,
+    secondPrice,
+    date,
+    thirdPrice,
+  }: Props) => {
   const isPopupNeeded = Boolean(date);
 
   return (
@@ -57,19 +69,20 @@ const Component = ({ name, imageUrl, price, effectName, effectImg, quality, seco
             alt=""
           />
         </div>
-        {Boolean(secondPrice) ? (
-          <>
-            <span className={cn(`${CLASS_NAME}__second-price`)}>
-              {secondPrice}
-            </span>
 
-            <span className={cn(`${CLASS_NAME}__price`)}>
-              {price}
-            </span>
-          </>
-        ) : (
-          <span className={cn(`${CLASS_NAME}__price`)}>
-            {price}
+        <span className={cn(`${CLASS_NAME}__price`)}>
+          {price}
+        </span>
+
+        {Boolean(secondPrice) && (
+          <span className={cn(`${CLASS_NAME}__second-price`)}>
+            {secondPrice}
+          </span>
+        )}
+
+        {Boolean(thirdPrice) && (
+          <span className={cn(`${CLASS_NAME}__third-price`)}>
+            {thirdPrice}
           </span>
         )}
       </div>

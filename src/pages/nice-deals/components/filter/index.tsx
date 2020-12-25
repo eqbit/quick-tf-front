@@ -1,10 +1,10 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import styles from './index.module.scss';
 import classNamesBind from 'classnames/bind';
 import Slider from '@material-ui/core/Slider';
-import { debounce } from 'lodash-es';
 import { SEARCH_DEBOUNCE } from '../../../../config/constants';
 import { SearchBar } from '../../../../components/search-bar';
+import { useAutoCallback, useDebounce } from '../../../../hooks/use-debounce';
 
 const CLASS_NAME = 'filter';
 const cn = classNamesBind.bind(styles);
@@ -28,38 +28,24 @@ const Component = (
   const [localProfitPercent, setLocalProfitPercent] = useState(profitPercent);
   const [localDepth, setLocalDepth] = useState(12);
 
-  const setProfitPercent = useCallback(
-    debounce((value: number) => onProfitPercentChange(value), SEARCH_DEBOUNCE),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
   const handleProfitPercentChange = (event: React.ChangeEvent<{}>, newValue: number | number[]) => {
     setLocalProfitPercent(Array.isArray(newValue) ? newValue[0] : newValue);
   };
-
-  useEffect(() => {
-    setProfitPercent(localProfitPercent);
-  }, [localProfitPercent, setProfitPercent]);
-
-  const setDepth = useCallback(
-    debounce((value: number) => onDepthChange(value), SEARCH_DEBOUNCE),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   const handleDepthChange = (event: React.ChangeEvent<{}>, newValue: number | number[]) => {
     setLocalDepth(Array.isArray(newValue) ? newValue[0] : newValue);
   };
 
-  useEffect(() => {
-    setDepth(localDepth);
-  }, [localDepth, setDepth]);
+  const debouncedProfitPercent = useDebounce(localProfitPercent, SEARCH_DEBOUNCE);
+  const debouncedDepth = useDebounce(localDepth, SEARCH_DEBOUNCE);
+
+  useAutoCallback(debouncedDepth, onDepthChange);
+  useAutoCallback(debouncedProfitPercent, onProfitPercentChange);
 
   return (
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__field`, `${CLASS_NAME}__search`)}>
-        <h3 className={cn(`${CLASS_NAME}__field-title`)}>Search by name</h3>
+        <h3 className={cn(`${CLASS_NAME}__field-title`)}>Search by name/effect</h3>
         <SearchBar value={searchQuery} onChange={onSearch}/>
       </div>
 

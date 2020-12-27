@@ -1,0 +1,53 @@
+@import "../../../styles/colors.module";
+
+.item-with-popup {
+  position: relative;
+
+  &__popup {
+    background: #FFF;
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
+    color: #333;
+    font-size: 12px;
+    left: 0;
+    opacity: 0;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    transform: translateX(-200vw);
+    transition: .1s;
+    transition-delay: .05s;
+    transition-property: opacity;
+    width: 100%;
+    z-index: 10;
+  }
+
+  &:hover &__popup {
+    opacity: 1;
+    transform: none;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 8px -2px -2px;
+  }
+
+  &__link {
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    color: #333;
+    margin: 2px;
+    padding: 4px;
+    transition: box-shadow .3s;
+
+    &:hover {
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus {
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      outline: none;
+      transition: box-shadow 0s;
+    }
+  }
+}

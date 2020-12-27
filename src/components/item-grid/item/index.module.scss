@@ -138,33 +138,4 @@
     position: absolute;
     right: 4px;
   }
-
-  &__popup {
-    background: #FFF;
-    box-shadow: 0 0 4px rgba(0,0,0,.5);
-    color: #333;
-    font-size: 12px;
-    left: 0;
-    opacity: 0;
-    padding: 10px;
-    position: absolute;
-    top: 100%;
-    transform: translateX(-200vw);
-    transition: .1s;
-    transition-delay: .05s;
-    transition-property: opacity;
-    width: 100%;
-    z-index: 10;
-  }
-
-  &__wrapper {
-    position: relative;
-
-    &:hover {
-      #{$self}__popup {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  }
 }

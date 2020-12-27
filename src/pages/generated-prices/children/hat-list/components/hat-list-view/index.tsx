@@ -1,8 +1,7 @@
 import React, { memo, useMemo, useState } from 'react';
 import classNamesBind from 'classnames/bind';
-import { Link } from 'react-router5';
 import { ItemGrid } from '../../../../../../components/item-grid';
-import { Item } from '../../../../../../components/item-grid/item';
+import { ItemWithLink } from '../../../../../../components/item-grid/item';
 import { GeneratedBasePriceItem } from '../../../../../../api/requests/prices/types';
 import styles from './index.module.scss';
 import { SearchBar } from '../../../../../../components/search-bar';
@@ -43,21 +42,20 @@ const Component = ({ basePrices, schema }: Props) => {
       <div className={cn(`${CLASS_NAME}__items-grid`)}>
         <ItemGrid>
           {filteredPrices.map((item) => (
-            <Link
+            <ItemWithLink
               key={item.id}
-              routeName="unusuals.hat.hat-detail"
-              routeParams={{ name: item.name, effect: item.effect }}
-            >
-              <Item
-                name={item.name}
-                imageUrl={schema.image_url}
-                price={item.price}
-                effectName={item.effect}
-                effectImg={item.effectImg}
-                quality="Unusual"
-              />
-
-            </Link>
+              name={item.name}
+              imageUrl={schema.image_url}
+              price={item.price}
+              effectName={item.effect}
+              effectImg={item.effectImg}
+              quality="Unusual"
+              link={{
+                isExternal: false,
+                routeName: 'unusuals.hat.hat-detail',
+                routeParams: { name: item.name, effect: item.effect }
+              }}
+            />
           ))}
         </ItemGrid>
       </div>

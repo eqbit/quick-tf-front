@@ -9,14 +9,14 @@
   &__row {
     color: #333;
     display: grid;
-    grid-template-columns: auto auto 1fr auto;
     grid-gap: 8px;
+    grid-template-columns: auto auto 1fr auto;
     transition: opacity .3s;
   }
 
   &__cell {
-    padding: 8px;
     background: rgba(black, .1);
+    padding: 8px;
 
     &--sale {
       background: #ff7918;
@@ -26,6 +26,7 @@
     &--buy {
       background: #1d96c5;
       color: #FFF;
+      width: 46px;
     }
 
     &--unusual {

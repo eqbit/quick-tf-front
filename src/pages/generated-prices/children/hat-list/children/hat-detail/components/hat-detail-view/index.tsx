@@ -55,14 +55,7 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
   return (
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__info`)}>
-        <a
-          className={cn(`${CLASS_NAME}__link`)}
-          href={bptfHatLink}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <h1 className={cn(`${CLASS_NAME}__page-title`)}>{`${effect} ${name}`}</h1>
-        </a>
+        <h1 className={cn(`${CLASS_NAME}__page-title`)}>{`${effect} ${name}`}</h1>
         <a
           className={cn(`${CLASS_NAME}__link`)}
           href={bptfHatLink}

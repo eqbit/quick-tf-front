@@ -5,6 +5,7 @@ import { ItemGrid } from '../../../../components/item-grid';
 import { ItemWithLink } from '../../../../components/item-grid/item';
 import styles from './index.module.scss';
 import { SearchBar } from '../../../../components/search-bar';
+import { getCleanDigit } from '../../../../utils/get-clean-digit';
 
 const cn = classNamesBind.bind(styles);
 const CLASS_NAME = 'base-prices-view';
@@ -35,7 +36,7 @@ const Component = ({ basePrices }: Props) => {
               key={item.id}
               name={item.name}
               imageUrl={item.image_url}
-              price={`base: ${Math.floor(Number(item.price) * 100) / 100}`}
+              price={`base: ${getCleanDigit(Number(item.price))}`}
               quality="Unusual"
               link={{
                 isExternal: false,

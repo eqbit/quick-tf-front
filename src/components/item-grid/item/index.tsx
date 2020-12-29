@@ -10,7 +10,7 @@ const CLASS_NAME = 'item';
 type Props = {
   name: string;
   imageUrl: string;
-  price: string;
+  price?: string;
   secondPrice?: string;
   thirdPrice?: string;
   effectName?: string;
@@ -60,20 +60,22 @@ const Component = (
         />
       </div>
 
-      <span className={cn(`${CLASS_NAME}__price`)}>
+      {Boolean(price) && (
+        <span className={cn(`${CLASS_NAME}__price`)}>
           {price}
         </span>
+      )}
 
       {Boolean(secondPrice) && (
         <span className={cn(`${CLASS_NAME}__second-price`)}>
-            {secondPrice}
-          </span>
+          {secondPrice}
+        </span>
       )}
 
       {Boolean(thirdPrice) && (
         <span className={cn(`${CLASS_NAME}__third-price`)}>
-            {thirdPrice}
-          </span>
+          {thirdPrice}
+        </span>
       )}
     </div>
   )

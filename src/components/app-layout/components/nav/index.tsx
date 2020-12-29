@@ -17,20 +17,16 @@ const NavComponent = () => {
             <li className={cn(`${CLASS_NAME}__link`)}>Home</li>
           </BaseLink>
 
+          <BaseLink routeName="nice-deals" router={router}>
+            <li className={cn(`${CLASS_NAME}__link`)}>Nice deals</li>
+          </BaseLink>
+
           <BaseLink routeName="trades-made" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Past trades</li>
           </BaseLink>
 
           <BaseLink routeName="unusuals" router={router}>
             <li className={cn(`${CLASS_NAME}__link`)}>Unusuals</li>
-          </BaseLink>
-
-          <BaseLink routeName="regular-items" router={router}>
-            <li className={cn(`${CLASS_NAME}__link`)}>Regular items</li>
-          </BaseLink>
-
-          <BaseLink routeName="nice-deals" router={router}>
-            <li className={cn(`${CLASS_NAME}__link`)}>Nice deals</li>
           </BaseLink>
         </ul>
       </Container>

@@ -13,7 +13,8 @@ export type GeneratedBasePriceItem = {
   name: string;
   effect: string;
   effectId: number;
-  price: string;
+  price: number;
+  bptfPrice: number;
 };
 
 export type GeneratedBasePriceListResponse = {

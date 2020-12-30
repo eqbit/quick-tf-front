@@ -36,7 +36,7 @@ const Component = ({ basePrices }: Props) => {
               key={item.id}
               name={item.name}
               imageUrl={item.image_url}
-              price={`base: ${getCleanDigit(Number(item.price))}`}
+              price={Number(item.price) ? `base: ${getCleanDigit(Number(item.price))}` : 'No data'}
               quality="Unusual"
               link={{
                 isExternal: false,

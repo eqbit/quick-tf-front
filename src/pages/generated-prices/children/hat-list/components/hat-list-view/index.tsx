@@ -19,13 +19,16 @@ const Component = ({ basePrices, schema }: Props) => {
   const [searchValue, setSearchValue] = useState('');
 
   const filteredPrices = useMemo(() => {
-    return basePrices.sort((a, b) => Number(b.price) - Number(a.price))
+    return basePrices.sort((a, b) => b.price - a.price)
       .filter(item => item.effect.toLowerCase().includes(searchValue.toLowerCase()))
       .map((item): any => ({
         ...item,
-        price: `base: ${Math.floor(Number(item.price) * 100) / 100}`,
         effectImg: `https://backpack.tf/images/440/particles/${item.effectId}_380x380.png`,
-        link: `https://backpack.tf/classifieds?item=${item.name}&quality=5&tradable=1&craftable=1&australium=-1&particle=${item.effectId}&killstreak_tier=0`
+        link: `https://backpack.tf/classifieds?item=${
+          item.name
+        }&quality=5&tradable=1&craftable=1&australium=-1&particle=${
+          item.effectId
+        }&killstreak_tier=0`
       }))
   }, [basePrices, searchValue]);
 
@@ -46,7 +49,8 @@ const Component = ({ basePrices, schema }: Props) => {
               key={item.id}
               name={item.name}
               imageUrl={schema.image_url}
-              price={item.price}
+              price={`generated: ${item.price}`}
+              secondPrice={`suggested: ${item.bptfPrice}`}
               effectName={item.effect}
               effectImg={item.effectImg}
               quality="Unusual"

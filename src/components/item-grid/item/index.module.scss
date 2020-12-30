@@ -68,6 +68,10 @@
   }
 
   &--large {
+    height: 150px;
+  }
+
+  &--extra-large {
     height: 180px;
   }
 
@@ -115,27 +119,18 @@
     padding: 4px 8px;
     position: absolute;
     right: 4px;
+    transition: background-color .3s;
+
+    &--second {
+      bottom: 30px;
+    }
+
+    &--third {
+      bottom: 56px;
+    }
   }
 
-  &__second-price {
-    background: rgba(0,0,0,.2);
-    border-radius: 4px;
-    bottom: 56px;
-    color: #FFF;
-    font-size: 12px;
-    padding: 4px 8px;
-    position: absolute;
-    right: 4px;
-  }
-
-  &__third-price {
-    background: rgba(0,0,0,.2);
-    border-radius: 4px;
-    bottom: 30px;
-    color: #FFF;
-    font-size: 12px;
-    padding: 4px 8px;
-    position: absolute;
-    right: 4px;
+  &:hover &__price {
+    background: rgba(0,0,0,.35);
   }
 }

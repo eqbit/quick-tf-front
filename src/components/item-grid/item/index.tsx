@@ -36,6 +36,7 @@ const Component = (
       className={cn(CLASS_NAME, {
         [`${CLASS_NAME}--${quality?.toLowerCase()}`]: Boolean(quality),
         [`${CLASS_NAME}--large`]: Boolean(secondPrice),
+        [`${CLASS_NAME}--extra-large`]: Boolean(thirdPrice),
       })}
     >
       <h4 className={cn(`${CLASS_NAME}__name`)}>{effectName || name}</h4>
@@ -67,13 +68,13 @@ const Component = (
       )}
 
       {Boolean(secondPrice) && (
-        <span className={cn(`${CLASS_NAME}__second-price`)}>
+        <span className={cn(`${CLASS_NAME}__price`, `${CLASS_NAME}__price--second`)}>
           {secondPrice}
         </span>
       )}
 
       {Boolean(thirdPrice) && (
-        <span className={cn(`${CLASS_NAME}__third-price`)}>
+        <span className={cn(`${CLASS_NAME}__price`, `${CLASS_NAME}__price--third`)}>
           {thirdPrice}
         </span>
       )}

@@ -37,7 +37,8 @@ const Component = ({ registeredListings, onPointClick }: Props) => {
     yAxis: {
       title: {
         text: 'Prices',
-      }
+      },
+      min: 0,
     },
     series: [
       {

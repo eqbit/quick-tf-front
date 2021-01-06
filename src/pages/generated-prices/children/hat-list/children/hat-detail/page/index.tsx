@@ -3,6 +3,7 @@ import classNamesBind from 'classnames/bind';
 import { Container } from '../../../../../../../components/ui/container';
 import styles from './index.module.scss';
 import { ConnectedHatDetail } from '../components/connected-hat-detail';
+import { UnusualPrices } from '../../../../../../../api/requests/prices/types';
 
 const cn = classNamesBind.bind(styles);
 const CLASS_NAME = 'page-layout';
@@ -11,13 +12,14 @@ type Props = {
   name: string;
   quality: string;
   effect?: string;
+  prices?: UnusualPrices;
 };
 
-const Layout = ({ name, quality, effect }: Props) => {
+const Layout = (props: Props) => {
   return (
     <Container>
       <div className={cn(CLASS_NAME)}>
-        <ConnectedHatDetail name={name} quality={quality} effect={effect}/>
+        <ConnectedHatDetail {...props}/>
       </div>
     </Container>
   )

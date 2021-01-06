@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 import { itemInfoRequest } from '../../../../../../../../api/requests/items';
 import { getEffectIndex } from '../../../../../../../../utils/effects';
 import { userInfoRequest } from '../../../../../../../../api/requests/user-info';
+import { UnusualPrices } from '../../../../../../../../api/requests/prices/types';
 
 const CLASS_NAME = 'view';
 const cn = classNamesBind.bind(styles);
@@ -15,6 +16,7 @@ type Props = {
   quality: string;
   effect?: string;
   registeredListings: RegisteredListing[];
+  prices?: UnusualPrices;
 };
 
 const Component = (
@@ -22,6 +24,7 @@ const Component = (
     registeredListings = [],
     name,
     effect,
+    prices,
   }: Props) => {
   const [ imgSrc, setImgSrc ] = useState('');
   const [ isUserLoading, setIsUserLoading ] = useState(false);
@@ -57,6 +60,8 @@ const Component = (
     effectIndex
   }&killstreak_tier=0`;
 
+  console.log('prices', prices);
+
   return (
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__info`)}>
@@ -80,9 +85,19 @@ const Component = (
               )}
             </div>
           </a>
-          <div className={cn(`${CLASS_NAME}__details`)}>
+          {Boolean(prices) && (
+            <div className={cn(`${CLASS_NAME}__details`)}>
+              <div className={cn(`${CLASS_NAME}-price-item`)}>
+                <div className={cn(`${CLASS_NAME}-price-item__title`)}>Suggested price</div>
+                <div className={cn(`${CLASS_NAME}-price-item__value`)}>{`${prices?.suggestedPrice} keys`}</div>
+              </div>
 
-          </div>
+              <div className={cn(`${CLASS_NAME}-price-item`)}>
+                <div className={cn(`${CLASS_NAME}-price-item__title`)}>Generated price</div>
+                <div className={cn(`${CLASS_NAME}-price-item__value`)}>{`${prices?.generatedPrice} keys`}</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

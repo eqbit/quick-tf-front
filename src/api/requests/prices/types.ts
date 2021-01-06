@@ -32,3 +32,8 @@ export type RegularItem = {
 };
 
 export type RegularItemsResponse = RegularItem[];
+
+export type UnusualPrices = {
+  suggestedPrice: number;
+  generatedPrice: number;
+}

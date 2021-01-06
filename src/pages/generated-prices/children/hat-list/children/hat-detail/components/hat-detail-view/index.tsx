@@ -17,7 +17,12 @@ type Props = {
   registeredListings: RegisteredListing[];
 };
 
-const Component = ({ registeredListings = [], name, effect }: Props) => {
+const Component = (
+  {
+    registeredListings = [],
+    name,
+    effect,
+  }: Props) => {
   const [ imgSrc, setImgSrc ] = useState('');
   const [ isUserLoading, setIsUserLoading ] = useState(false);
   const [ userName, setUserName ] = useState('');
@@ -56,24 +61,29 @@ const Component = ({ registeredListings = [], name, effect }: Props) => {
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__info`)}>
         <h1 className={cn(`${CLASS_NAME}__page-title`)}>{`${effect} ${name}`}</h1>
-        <a
-          className={cn(`${CLASS_NAME}__link`)}
-          href={bptfHatLink}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        <div className={cn(`${CLASS_NAME}__data`)}>
+          <a
+            className={cn(`${CLASS_NAME}__link`)}
+            href={bptfHatLink}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
 
-          <div className={cn(`${CLASS_NAME}__img`)}>
-            <img src={imgSrc} alt=""/>
-            {Boolean(effect) && (
-              <img
-                className={cn(`${CLASS_NAME}__effect-img`)}
-                src={`https://backpack.tf/images/440/particles/${effectIndex}_380x380.png`}
-                alt=""
-              />
-            )}
+            <div className={cn(`${CLASS_NAME}__img`)}>
+              <img src={imgSrc} alt=""/>
+              {Boolean(effect) && (
+                <img
+                  className={cn(`${CLASS_NAME}__effect-img`)}
+                  src={`https://backpack.tf/images/440/particles/${effectIndex}_380x380.png`}
+                  alt=""
+                />
+              )}
+            </div>
+          </a>
+          <div className={cn(`${CLASS_NAME}__details`)}>
+
           </div>
-        </a>
+        </div>
       </div>
 
       <div className={cn(`${CLASS_NAME}-charts`)}>

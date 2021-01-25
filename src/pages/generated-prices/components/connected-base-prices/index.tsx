@@ -22,4 +22,3 @@ export const ConnectedBasePrices = connect(
   mapStateToProps,
   {},
 )(Component);
-

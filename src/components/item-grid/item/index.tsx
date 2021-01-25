@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import classNamesBind from 'classnames/bind';
 import styles from './index.module.scss';
 import { ItemLink } from './types';
@@ -16,6 +16,7 @@ type Props = {
   effectName?: string;
   effectImg?: string;
   quality?: string;
+  classes?: string[];
 };
 
 type PropsWithLink = Props & { link: ItemLink; };
@@ -30,7 +31,19 @@ const Component = (
     quality,
     secondPrice,
     thirdPrice,
+    classes,
   }: Props) => {
+
+  let usedByClass = useMemo(() => {
+    if (!classes || !classes.length) {
+      return 'unknown';
+    } else if (classes?.length === 1) {
+      return classes[0].toLowerCase();
+    } else {
+      return 'multi';
+    }
+  }, [classes]);
+
   return (
     <div
       className={cn(CLASS_NAME, {
@@ -39,7 +52,12 @@ const Component = (
         [`${CLASS_NAME}--extra-large`]: Boolean(thirdPrice),
       })}
     >
-      <h4 className={cn(`${CLASS_NAME}__name`)}>{effectName || name}</h4>
+      <h4 className={cn(`${CLASS_NAME}__name`)}>
+        <span>{effectName || name}</span>
+        {' '}
+        <span>({usedByClass})</span>
+      </h4>
+
       {
         Boolean(effectImg) && (
           <div
@@ -53,6 +71,7 @@ const Component = (
           </div>
         )
       }
+
       <div className={cn(`${CLASS_NAME}__img-wrapper`)}>
         <img
           className={cn(`${CLASS_NAME}__img`)}

@@ -2,6 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 import { NiceDealsPageLayout } from './page';
 import { niceDealsRequest } from '../../api/requests/listings';
 import { NiceDeal } from '../../api/requests/listings/types';
+import { getPriceRangeFromNiceDeals } from './utils/price-range';
 
 const DEFAULT_PROFIT_PERCENT = 20;
 const DEFAULT_DEPTH = 12;
@@ -13,6 +14,9 @@ const Page = () => {
   const [profitPercent, setProfitPercent] = useState(DEFAULT_PROFIT_PERCENT);
   const [depth, setDepth] = useState(DEFAULT_DEPTH);
   const [searchQuery, setSearchQuery] = useState('');
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
+  const [chosenPriceRange, setChosenPriceRange] = useState([0, 100]);
+  const [isPriceRangeSetOnce, setPriceRangeSetOnce] = useState(false);
 
   const fetchDeals = useCallback(() => new Promise<void>(resolve => {
     niceDealsRequest({
@@ -20,12 +24,21 @@ const Page = () => {
       depth,
     }).then((response) => {
       if (response?.data) {
-        setDeals(response?.data);
+        setDeals(response.data);
+
+        const newPriceRange = getPriceRangeFromNiceDeals(response.data);
+
+        setPriceRange(newPriceRange);
+
+        if (!isPriceRangeSetOnce) {
+          setChosenPriceRange([newPriceRange.min, newPriceRange.max]);
+          setPriceRangeSetOnce(true);
+        }
       }
 
       resolve();
     });
-  }), [depth, profitPercent]);
+  }), [depth, isPriceRangeSetOnce, profitPercent]);
 
   useEffect(() => {
     if (fetchDealsInterval.current) {
@@ -56,21 +69,31 @@ const Page = () => {
     setSearchQuery(value);
   };
 
+  const handlePriceRangeSet = (values: number[]) => {
+    setChosenPriceRange(values);
+  };
+
   const filteredDeals = useMemo(() => {
     return deals.filter(deal =>
       deal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       deal.effect.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  }, [deals, searchQuery]);
+    ).filter(deal =>
+      deal.listingPrice >= chosenPriceRange[0] && deal.listingPrice <= chosenPriceRange[1]
+    );
+  }, [chosenPriceRange, deals, searchQuery]);
 
   return (
     <NiceDealsPageLayout
       deals={filteredDeals}
       profitPercent={profitPercent}
+      searchQuery={searchQuery}
+      minListingPrice={priceRange.min}
+      maxListingPrice={priceRange.max}
+      chosenPriceRange={chosenPriceRange}
       onProfitPercentChange={handleProfitPercentChange}
       onDepthChange={handleDepthChange}
-      searchQuery={searchQuery}
       onSearch={handleSearch}
+      onPriceRangeSet={handlePriceRangeSet}
     />
   );
 };

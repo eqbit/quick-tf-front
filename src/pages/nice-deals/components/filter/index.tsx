@@ -11,6 +11,10 @@ const cn = classNamesBind.bind(styles);
 
 type Props = {
   profitPercent: number;
+  minListingPrice: number;
+  maxListingPrice: number;
+  chosenPriceRange: number[];
+  onPriceRangeSet: (values: number[]) => void;
   onProfitPercentChange: (value: number) => void;
   onDepthChange: (value: number) => void;
   searchQuery: string;
@@ -24,6 +28,10 @@ const Component = (
     onDepthChange,
     onSearch,
     searchQuery,
+    minListingPrice,
+    maxListingPrice,
+    chosenPriceRange,
+    onPriceRangeSet,
   }: Props) => {
   const [localProfitPercent, setLocalProfitPercent] = useState(profitPercent);
   const [localDepth, setLocalDepth] = useState(12);
@@ -42,6 +50,10 @@ const Component = (
   useAutoCallback(debouncedDepth, onDepthChange);
   useAutoCallback(debouncedProfitPercent, onProfitPercentChange);
 
+  const handlePriceRangeSliderChange = (_: any, values: number | number[]) => {
+    onPriceRangeSet(values as number[]);
+  };
+
   return (
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__field`, `${CLASS_NAME}__search`)}>
@@ -59,6 +71,18 @@ const Component = (
           {`Depth: ${localDepth} ${localDepth === 1 ? 'hour' : 'hours'}`}
         </h3>
         <Slider min={1} max={48} value={localDepth} onChange={handleDepthChange}/>
+      </div>
+
+      <div className={cn(`${CLASS_NAME}__field`, `${CLASS_NAME}__slider`)}>
+        <h3 className={cn(`${CLASS_NAME}__field-title`)}>
+          {`Range: ${chosenPriceRange[0]} - ${chosenPriceRange[1]}`}
+        </h3>
+        <Slider
+          min={minListingPrice}
+          max={maxListingPrice}
+          value={chosenPriceRange}
+          onChange={handlePriceRangeSliderChange}
+        />
       </div>
     </div>
   );

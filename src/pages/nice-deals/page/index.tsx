@@ -13,11 +13,15 @@ const CLASS_NAME = 'page-layout';
 
 type Props = {
   deals: NiceDeal[];
-  onProfitPercentChange: (value: number) => void;
-  onDepthChange: (value: number) => void;
   profitPercent: number;
   searchQuery: string;
+  minListingPrice: number;
+  maxListingPrice: number;
+  chosenPriceRange: number[];
   onSearch: (value: string) => void;
+  onProfitPercentChange: (value: number) => void;
+  onDepthChange: (value: number) => void;
+  onPriceRangeSet: (values: number[]) => void;
 };
 
 const Layout = (
@@ -28,6 +32,10 @@ const Layout = (
     onDepthChange,
     onSearch,
     searchQuery,
+    maxListingPrice,
+    minListingPrice,
+    chosenPriceRange,
+    onPriceRangeSet,
   }: Props) => {
   return (
     <Container>
@@ -35,10 +43,14 @@ const Layout = (
         <div className={cn(`${CLASS_NAME}__filter`)}>
           <Filter
             profitPercent={profitPercent}
+            minListingPrice={minListingPrice}
+            maxListingPrice={maxListingPrice}
+            chosenPriceRange={chosenPriceRange}
             onProfitPercentChange={onProfitPercentChange}
             onDepthChange={onDepthChange}
             searchQuery={searchQuery}
             onSearch={onSearch}
+            onPriceRangeSet={onPriceRangeSet}
           />
         </div>
 

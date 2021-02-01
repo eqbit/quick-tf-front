@@ -3,6 +3,7 @@ import classNamesBind from 'classnames/bind';
 import styles from './index.module.scss';
 import { ItemLink } from './types';
 import { Link } from 'react-router5';
+import { getDiscountLevel } from '../../../utils/get-discount-level';
 
 const cn = classNamesBind.bind(styles);
 const CLASS_NAME = 'item';
@@ -17,6 +18,7 @@ type Props = {
   effectImg?: string;
   quality?: string;
   classes?: string[];
+  discountPercent?: number;
 };
 
 type PropsWithLink = Props & { link: ItemLink; };
@@ -32,17 +34,20 @@ const Component = (
     secondPrice,
     thirdPrice,
     classes,
+    discountPercent,
   }: Props) => {
 
   let usedByClass = useMemo(() => {
     if (!classes || !classes.length) {
-      return 'unknown';
+      return null;
     } else if (classes?.length === 1) {
       return classes[0].toLowerCase();
     } else {
       return 'multi';
     }
   }, [classes]);
+
+  const discountLevel = discountPercent && getDiscountLevel(discountPercent);
 
   return (
     <div
@@ -55,7 +60,7 @@ const Component = (
       <h4 className={cn(`${CLASS_NAME}__name`)}>
         <span>{effectName || name}</span>
         {' '}
-        <span>({usedByClass})</span>
+        {Boolean(usedByClass) && <span>({usedByClass})</span>}
       </h4>
 
       {
@@ -95,6 +100,12 @@ const Component = (
       {Boolean(thirdPrice) && (
         <span className={cn(`${CLASS_NAME}__price`, `${CLASS_NAME}__price--third`)}>
           {thirdPrice}
+        </span>
+      )}
+
+      {Boolean(discountPercent) && (
+        <span className={cn(`${CLASS_NAME}__discount-percent`, `${CLASS_NAME}__discount-percent--${discountLevel}`)}>
+          {`${discountPercent}%`}
         </span>
       )}
     </div>

@@ -133,4 +133,64 @@
   &:hover &__price {
     background: rgba(0,0,0,.35);
   }
+
+  &__discount-percent {
+    border-radius: 0 155px 0 0;
+    bottom: 0;
+    color: #FFF;
+    display: flex;
+    font-size: 10px;
+    font-weight: bold;
+    height: 36px;
+    left: 0;
+    padding: 18px 3px;
+    position: absolute;
+    text-align: center;
+    width: 45px;
+    z-index: 1;
+
+    &:after {
+      background: white;
+      content: "";
+      display: block;
+      height: 100px;
+      left: -64px;
+      opacity: .6;
+      position: absolute;
+      top: -7px;
+      transform: rotate(45deg);
+      width: 100px;
+      z-index: -1;
+    }
+
+    &--ultra-overpriced {
+      &:after {
+        background: #7b0003;
+      }
+    }
+
+    &--overpriced {
+      &:after {
+        background: red;
+      }
+    }
+
+    &--very-good {
+      &:after {
+        background: lime;
+      }
+    }
+
+    &--good {
+      &:after {
+        background: #007a00;
+      }
+    }
+
+    &--notable {
+      &:after {
+        background: #3d747a;
+      }
+    }
+  }
 }

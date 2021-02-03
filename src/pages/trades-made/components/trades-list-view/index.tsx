@@ -14,8 +14,25 @@ type Props = {
 const Component = ({ tradesMade }: Props) => {
   return (
     <ul className={cn(CLASS_NAME)}>
-      {tradesMade.map(trade => {
+      {tradesMade.map((trade, index) => {
+        const tradeHash = `${trade.effect} ${trade.name}`;
         const tradeDirection = trade.direction ? 'Sale' : 'Buy';
+        let boughtFor = null;
+
+        if (tradeDirection === 'Sale') {
+          boughtFor = tradesMade.slice(index + 1).find(({ effect, name, direction }) => {
+            if (direction) {
+              return false;
+            }
+
+            const hash = `${effect} ${name}`;
+            if (hash === tradeHash) {
+              return true;
+            }
+
+            return false;
+          });
+        }
 
         return (
           <li key={trade.id}>
@@ -60,6 +77,20 @@ const Component = ({ tradesMade }: Props) => {
               >
                 {Boolean(trade.keys) && <span>{`${trade.keys} keys`}</span>}
                 {Boolean(trade.metal) && <span>{`${trade.metal} ref`}</span>}
+              </div>
+
+              <div
+                className={cn(
+                  `${CLASS_NAME}__cell`,
+                  `${CLASS_NAME}__cell--currency`
+                )}
+              >
+                {boughtFor && (
+                  <>
+                    {Boolean(boughtFor.keys) && <span>{`${boughtFor.keys} keys`}</span>}
+                    {Boolean(boughtFor.metal) && <span>{`${boughtFor.metal} ref`}</span>}
+                  </>
+                )}
               </div>
             </Link>
           </li>

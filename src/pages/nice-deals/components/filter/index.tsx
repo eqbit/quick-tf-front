@@ -5,6 +5,7 @@ import Slider from '@material-ui/core/Slider';
 import { SEARCH_DEBOUNCE } from '../../../../config/constants';
 import { SearchBar } from '../../../../components/search-bar';
 import { useAutoCallback, useDebounce } from '../../../../hooks/use-debounce';
+import { DEFAULT_DEPTH } from '../../constants';
 
 const CLASS_NAME = 'filter';
 const cn = classNamesBind.bind(styles);
@@ -34,7 +35,7 @@ const Component = (
     onPriceRangeSet,
   }: Props) => {
   const [localProfitPercent, setLocalProfitPercent] = useState(profitPercent);
-  const [localDepth, setLocalDepth] = useState(12);
+  const [localDepth, setLocalDepth] = useState(DEFAULT_DEPTH);
 
   const handleProfitPercentChange = (event: React.ChangeEvent<{}>, newValue: number | number[]) => {
     setLocalProfitPercent(Array.isArray(newValue) ? newValue[0] : newValue);

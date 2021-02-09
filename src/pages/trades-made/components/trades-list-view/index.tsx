@@ -39,7 +39,7 @@ const Component = ({ tradesMade }: Props) => {
             <Link
               className={cn(`${CLASS_NAME}__row`)}
               routeName="unusuals.hat.hat-detail"
-              routeParams={{ name: trade.name, effect: trade.effect }}
+              routeParams={{ name: `${trade.name.replace('(', '').replace(')', '')}`, effect: trade.effect }}
             >
               <div
                 className={cn(

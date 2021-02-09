@@ -3,9 +3,7 @@ import { NiceDealsPageLayout } from './page';
 import { niceDealsRequest } from '../../api/requests/listings';
 import { NiceDeal } from '../../api/requests/listings/types';
 import { getPriceRangeFromNiceDeals } from './utils/price-range';
-
-const DEFAULT_PROFIT_PERCENT = 20;
-const DEFAULT_DEPTH = 12;
+import { DEFAULT_DEPTH, DEFAULT_PROFIT_PERCENT } from './constants';
 
 const Page = () => {
   const [deals, setDeals] = useState<NiceDeal[]>([]);

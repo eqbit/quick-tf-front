@@ -21,7 +21,7 @@ const Page = ({ fetchGeneratedBasePrices }: Props) => {
 };
 
 export const GeneratedPricesListPage = connect(
-  () => ({}),
+  null,
   {
     fetchGeneratedBasePrices: fetchGeneratedBasePricesListAction,
   })(Page);

@@ -17,7 +17,7 @@ const Page = ({ fetchRegisteredTrades }: Props) => {
 };
 
 export const TradesMadePage = connect(
-  () => ({}),
+  null,
   {
     fetchRegisteredTrades: fetchRegisteredTradesAction,
   }

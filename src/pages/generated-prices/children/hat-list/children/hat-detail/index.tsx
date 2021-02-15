@@ -40,7 +40,7 @@ const Page = ({ fetchRegisteredListings }: Props) => {
 };
 
 export const GeneratedUnusualHatDetailPage = connect(
-  () => ({}),
+  null,
   {
     fetchRegisteredListings: fetchRegisteredListingsAction
   })(Page);

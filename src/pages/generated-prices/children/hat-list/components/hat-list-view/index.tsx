@@ -47,6 +47,7 @@ const Component = ({ basePrices, schema }: Props) => {
           {filteredPrices.map((item) => (
             <ItemWithLink
               key={item.id}
+              id={item.id}
               name={item.name}
               imageUrl={schema.image_url}
               price={`generated: ${item.price}`}

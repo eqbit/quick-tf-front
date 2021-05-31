@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo } from 'react'
 import classNamesBind from 'classnames/bind';
 import styles from './index.module.scss';
 import { ItemLink } from './types';
@@ -11,6 +11,7 @@ const CLASS_NAME = 'item';
 type Props = {
   name: string;
   imageUrl: string;
+  id: number;
   price?: string;
   secondPrice?: string;
   thirdPrice?: string;
@@ -19,6 +20,8 @@ type Props = {
   quality?: string;
   classes?: string[];
   discountPercent?: number;
+  onIntersection?: (id: number) => void;
+  isViewed?: boolean;
 };
 
 type PropsWithLink = Props & { link: ItemLink; };
@@ -27,6 +30,7 @@ const Component = (
   {
     name,
     imageUrl,
+    id,
     price,
     effectName,
     effectImg,
@@ -35,9 +39,11 @@ const Component = (
     thirdPrice,
     classes,
     discountPercent,
+    onIntersection,
+    isViewed,
   }: Props) => {
 
-  let usedByClass = useMemo(() => {
+  const usedByClass = useMemo(() => {
     if (!classes || !classes.length) {
       return null;
     } else if (classes?.length === 1) {
@@ -49,13 +55,21 @@ const Component = (
 
   const discountLevel = discountPercent && getDiscountLevel(discountPercent);
 
+  const handleMouseEnter = () => {
+    if (onIntersection) {
+      onIntersection(id);
+    }
+  }
+
   return (
     <div
       className={cn(CLASS_NAME, {
         [`${CLASS_NAME}--${quality?.toLowerCase()}`]: Boolean(quality),
         [`${CLASS_NAME}--large`]: Boolean(secondPrice),
         [`${CLASS_NAME}--extra-large`]: Boolean(thirdPrice),
+        [`${CLASS_NAME}--viewed`]: isViewed === true,
       })}
+      onMouseEnter={handleMouseEnter}
     >
       <h4 className={cn(`${CLASS_NAME}__name`)}>
         <span>{effectName || name}</span>
@@ -87,26 +101,26 @@ const Component = (
 
       {Boolean(price) && (
         <span className={cn(`${CLASS_NAME}__price`)}>
-          {price}
-        </span>
+        {price}
+      </span>
       )}
 
       {Boolean(secondPrice) && (
         <span className={cn(`${CLASS_NAME}__price`, `${CLASS_NAME}__price--second`)}>
-          {secondPrice}
-        </span>
+        {secondPrice}
+      </span>
       )}
 
       {Boolean(thirdPrice) && (
         <span className={cn(`${CLASS_NAME}__price`, `${CLASS_NAME}__price--third`)}>
-          {thirdPrice}
-        </span>
+        {thirdPrice}
+      </span>
       )}
 
       {Boolean(discountPercent) && (
         <span className={cn(`${CLASS_NAME}__discount-percent`, `${CLASS_NAME}__discount-percent--${discountLevel}`)}>
-          {`${discountPercent}%`}
-        </span>
+        {`${discountPercent}%`}
+      </span>
       )}
     </div>
   )

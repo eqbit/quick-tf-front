@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react'
 import classNamesBind from 'classnames/bind';
 import { Container } from '../../../components/ui/container';
 import styles from './index.module.scss';
@@ -38,6 +38,12 @@ const Layout = (
     chosenPriceRange,
     onPriceRangeSet,
   }: Props) => {
+  const [viewedItems, setViewedItems] = useState<number[]>([]);
+
+  const handleIntersection = (id: number) => {
+    setViewedItems([...viewedItems, id]);
+  }
+
   return (
     <Container>
       <div className={cn(CLASS_NAME)}>
@@ -61,6 +67,7 @@ const Layout = (
                 const discountPercent = getCleanDigit(
                   (item.generatedPrice - item.listingPrice) / (item.generatedPrice / 100),
                   0);
+                const isViewed = viewedItems.includes(item.id);
                 return (
                   <ItemWithPopup
                     key={item.id}
@@ -82,6 +89,7 @@ const Layout = (
                     <ItemWithLink
                       name={item.name}
                       imageUrl={item.imageUrl || ''}
+                      id={item.id}
                       price={`generated: ${item.generatedPrice}`}
                       secondPrice={`suggested: ${item.bptfPrice}`}
                       thirdPrice={`listing: ${item.listingPrice}`}
@@ -97,6 +105,8 @@ const Layout = (
                           item.effectIndex
                         }&killstreak_tier=0`
                       }}
+                      onIntersection={handleIntersection}
+                      isViewed={isViewed}
                     />
                   </ItemWithPopup>
                 )

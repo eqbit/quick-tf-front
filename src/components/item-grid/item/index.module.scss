@@ -8,7 +8,7 @@
   overflow: hidden;
   padding: 12px;
   position: relative;
-  transition: background-color .3s;
+  transition: background-color .3s, opacity .3s;
   z-index: 1;
 
   &--unusual {
@@ -73,6 +73,14 @@
 
   &--extra-large {
     height: 180px;
+  }
+
+  &--viewed {
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__img-wrapper {

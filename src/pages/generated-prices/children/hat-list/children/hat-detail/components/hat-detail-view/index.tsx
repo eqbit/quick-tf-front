@@ -60,8 +60,6 @@ const Component = (
     effectIndex
   }&killstreak_tier=0`;
 
-  console.log('prices', prices);
-
   return (
     <div className={cn(CLASS_NAME)}>
       <div className={cn(`${CLASS_NAME}__info`)}>
